@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArtGallery implements LegalEntity {
+    // Core attributes of an art gallery
     private String name;
     private String address;
     private String vatNumber;
     private List<Exhibition> exhibitions;
     private static final String FILE_NAME = "exhibitions.txt";
 
+    // Constructor to initialize the gallery with legal entity information
     public ArtGallery(String name, String address, String vatNumber) {
         this.name = name;
         this.address = address;
@@ -18,6 +20,7 @@ public class ArtGallery implements LegalEntity {
         this.exhibitions = new ArrayList<>();
     }
 
+    // Implementation of LegalEntity interface methods
     @Override
     public String getAddress() {
         return address;
@@ -28,26 +31,31 @@ public class ArtGallery implements LegalEntity {
         return vatNumber;
     }
 
+    // Method to add a new exhibition to the gallery
     public void addExhibition(Exhibition exhibition) {
         if (exhibition != null && !exhibitions.contains(exhibition)) {
             exhibitions.add(exhibition);
         }
     }
 
+    // Method to remove an exhibition from the gallery
     public boolean removeExhibition(Exhibition exhibition) {
         return exhibitions.remove(exhibition);
     }
 
+    // Method to print all exhibitions in the gallery
     public void printExhibitions() {
         for (Exhibition e : exhibitions) {
             System.out.println(e);
         }
     }
 
+    // Method to get the total number of exhibitions
     public int getExhibitionCount() {
         return exhibitions.size();
     }
 
+    // Method to save all exhibitions to a file
     public void saveExhibitionsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Exhibition e : exhibitions) {
@@ -60,6 +68,7 @@ public class ArtGallery implements LegalEntity {
         }
     }
 
+    // Method to load exhibitions from a file
     public void loadExhibitionsFromFile() {
         exhibitions.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
